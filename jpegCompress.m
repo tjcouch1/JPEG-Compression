@@ -52,9 +52,14 @@ quantizedImg = zeros(imSize);
 
 for i = 1:imSize(1)
     for j = 1:imSize(2)
-        quantizedImg(i, j, 1) = round(dctImg(i, j, 1) / lumQuant(i, j));
-        quantizedImg(i, j, 2) = round(dctImg(i, j, 2) / chromQuant(i, j));
-        quantizedImg(i, j, 3) = round(dctImg(i, j, 3) / chromQuant(i, j));
+        %get the image position wrapped to the block size for the quantization tables
+        quantRow = mod(i - 1, blockSize) + 1;
+        quantCol = mod(j - 1, blockSize) + 1;
+        
+        %divide the dct values by the quantization table values piece-wise
+        quantizedImg(i, j, 1) = round(dctImg(i, j, 1) / lumQuant(quantRow, quantCol));
+        quantizedImg(i, j, 2) = round(dctImg(i, j, 2) / chromQuant(quantRow, quantCol));
+        quantizedImg(i, j, 3) = round(dctImg(i, j, 3) / chromQuant(quantRow, quantCol));
     end
 end
 

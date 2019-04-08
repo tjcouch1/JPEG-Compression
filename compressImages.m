@@ -12,6 +12,7 @@ close all;
 for i = 1:3
     fileName = sprintf('image%d.jpg', i);
     
+    %display the current file to keep track
     fprintf('File: %s\n', fileName);
     
     %read rgb image
@@ -20,10 +21,10 @@ for i = 1:3
     %compress image
     compressedImg = jpegCompress(sourceImg);
     
+    %show image
     imshow(compressedImg);
     
     %write compressed image to its own file
-    %might need to write as png to preserve the data
-    writeName = sprintf("compressed-image%d.jpg", i);
+    writeName = sprintf('compressed-image%d.png', i);
     imwrite(compressedImg, writeName);
 end

@@ -12,17 +12,21 @@ close all;
 fileName = input('Enter the path to the image to compress: ', 's');
 
 if (~exist(fileName, 'file'))%if file doesn't exist, say so. Replace exists with isfile in MATLAB newer than R2017a
-    fprintf("File %s does not exist!\n", fileName);
+    fprintf('File %s does not exist!\n', fileName);
 else
-    fprintf("File: %s", fileName);
+    %display the current file to keep track
+    fprintf('File: %s\n', fileName);
 
     %read rgb image
     sourceImg = imread(fileName);
 
     %compress image
     compressedImg = jpegCompress(sourceImg);
+    
+    %show image
+    imshow(compressedImg);
 
     %write compressed image to its own file
-    writeName = sprintf("compressed-%s");
-    imwrite(yCbCrImg, writeName);
+    writeName = sprintf('compressed-%s%s', fileName(1:end-4), '.png');
+    imwrite(compressedImg, writeName);
 end

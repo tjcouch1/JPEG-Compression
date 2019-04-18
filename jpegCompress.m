@@ -17,10 +17,7 @@ imSize = size(sourceImg);
 yCbCrImg = rgb2ycbcr(sourceImg);
 
 %chroma subsample the image 4:2:0
-%probably doesn't work because of the 0
-%actually I think my chroma sub is just incorrect haha whoops
-%subsampledImg = chromaSub(image, 2, 0);
-subsampledImg = yCbCrImg;
+subsampledImg = chromaSub(yCbCrImg, 2, 0);
 
 %2D DCT with block size 8
 blockSize = 8;

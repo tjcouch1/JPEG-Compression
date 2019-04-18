@@ -3,8 +3,8 @@
 % sourceImg: the rgb image matrix to convert
 % cols1: the number of columns to sample from the first row
 % cols2: the number of columns to sample from the second row
-% Note: the image must be in rgb format
-% returns rgb image, Cb gray image, and Cr gray image
+% Note: the image must be in YCbCr format
+% returns YCbCr subsampled image
 % 
 % TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project

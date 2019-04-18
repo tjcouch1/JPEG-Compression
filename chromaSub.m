@@ -21,6 +21,8 @@ yCbCrImg = rgb2ycbcr(sourceImg);
 
 %create blank image matrices
 yccSubImg = uint8(zeros(imSize));%subsampled image
+cbImage = uint8(zeros(imSize));%Cb gray image
+crImage = uint8(zeros(imSize));%Cr gray image
 
 for i = 1:2:imSize(1)%every two rows
     for j = 1:imSize(2)%every column
@@ -37,6 +39,12 @@ for i = 1:2:imSize(1)%every two rows
         yccSubImg(i, j, 2) = cb;
         yccSubImg(i, j, 3) = cr;
         
+        %apply gray images
+        for k = 1:imSize(3)
+            cbImage(i, j, k) = cb;
+            crImage(i, j, k) = cr;
+        end
+        
         %2nd row
         if (i + 1 <= imSize(1))
             %copy y
@@ -50,8 +58,14 @@ for i = 1:2:imSize(1)%every two rows
             yccSubImg(i + 1, j, 2) = cb;
             yccSubImg(i + 1, j, 3) = cr;
         end
+        
+        %apply gray images
+        for k = 1:imSize(3)
+            cbImage(i + 1, j, k) = cb;
+            crImage(i + 1, j, k) = cr;
+        end
     end
 end
 
 %create subsampled rgb image
-f = ycbcr2rgb(yccSubImg);
+f = crImage;%ycbcr2rgb(yccSubImg);

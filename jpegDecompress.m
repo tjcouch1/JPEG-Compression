@@ -2,7 +2,7 @@
 % image: the jpeg compressed image matrix to decompress
 % returns decompressed image in rgb format
 % 
-% TJ Couch, Austin Vickers
+% TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project
 % CS 443 Multimedia
 % 4/8/19

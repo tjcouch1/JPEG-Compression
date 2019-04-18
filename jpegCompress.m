@@ -3,7 +3,7 @@
 % Note: the image must be in rgb format
 % returns compressed image in jpeg compressed format
 % 
-% TJ Couch, Austin Vickers
+% TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project
 % CS 443 Multimedia
 % 4/8/19

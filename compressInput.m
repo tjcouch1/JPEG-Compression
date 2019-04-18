@@ -1,7 +1,7 @@
 % compressInput
 % prompts the user for an image, then compresses the image at the supplied path
 % 
-% TJ Couch, Austin Vickers
+% TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project
 % CS 443 Multimedia
 % 4/8/19

@@ -1,7 +1,7 @@
 % compressImages
 % converts the three images in this directory from rgb to YCbCr
 % 
-% TJ Couch, Austin Vickers
+% TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project
 % CS 443 Multimedia
 % 4/8/19
@@ -19,7 +19,7 @@ for i = 1:3
     sourceImg = imread(fileName);
     
     %compress image
-    compressedImg = jpegCompress(sourceImg);
+    compressedImg = chromaSub(sourceImg, 2, 0);%jpegCompress(sourceImg);
     
     %show image
     imshow(compressedImg);

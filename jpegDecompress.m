@@ -7,6 +7,7 @@
 % CS 443 Multimedia
 % 4/8/19
 
+%Written by TJ Couch
 function f = jpegDecompress(quantizedImg)
 
 %get image size

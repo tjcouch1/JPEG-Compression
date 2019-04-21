@@ -51,5 +51,5 @@ for i = 1:imSize(1)
     end
 end
 
-%create subsampled rgb image
-f = quantizedImg;
+%return dequantized dct image
+f = dctImg;

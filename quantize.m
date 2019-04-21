@@ -10,10 +10,11 @@
 % 4/8/19
 
 %Written by TJ Couch
-function f = quantize(sourceImg)
+function f = quantize(dctImg)
 
 %get image size
-imSize = size(sourceImg);
+imSize = size(dctImg);
+blockSize = 8;
 
 %luminance quantization table
 lumQuant = [16  11  10  16  24  40  51  61;
@@ -44,9 +45,9 @@ for i = 1:imSize(1)
         quantCol = mod(j - 1, blockSize) + 1;
         
         %divide the dct values by the quantization table values piece-wise
-        quantizedImg(i, j, 1) = round(sourceImg(i, j, 1) / lumQuant(quantRow, quantCol));
-        quantizedImg(i, j, 2) = round(sourceImg(i, j, 2) / chromQuant(quantRow, quantCol));
-        quantizedImg(i, j, 3) = round(sourceImg(i, j, 3) / chromQuant(quantRow, quantCol));
+        quantizedImg(i, j, 1) = round(dctImg(i, j, 1) / lumQuant(quantRow, quantCol));
+        quantizedImg(i, j, 2) = round(dctImg(i, j, 2) / chromQuant(quantRow, quantCol));
+        quantizedImg(i, j, 3) = round(dctImg(i, j, 3) / chromQuant(quantRow, quantCol));
     end
 end
 

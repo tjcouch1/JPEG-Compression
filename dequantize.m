@@ -1,8 +1,8 @@
-% quantize.m - quantizes the DCT image according to JPEG standard
+% dequantize.m - dequantizes the quantized image according to JPEG standard
 % quantize(image)
-% sourceImg: the DCT image matrix to quantize
+% sourceImg: the quantize image matrix to dequantize
 % Note: the image must be in YCbCr format
-% returns quantized DCT image
+% returns dequantized DCT image
 % 
 % TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project
@@ -10,10 +10,11 @@
 % 4/8/19
 
 %Written by TJ Couch
-function f = quantize(sourceImg)
+function f = dequantize(quantizedImg)
 
 %get image size
-imSize = size(sourceImg);
+imSize = size(quantizedImg);
+blockSize = 8;
 
 %luminance quantization table
 lumQuant = [16  11  10  16  24  40  51  61;
@@ -35,7 +36,7 @@ chromQuant = [17 18 24 47 99 99 99 99;
               99 99 99 99 99 99 99 99;
               99 99 99 99 99 99 99 99;];
 
-quantizedImg = zeros(imSize);
+dctImg = zeros(imSize);
 
 for i = 1:imSize(1)
     for j = 1:imSize(2)
@@ -43,10 +44,10 @@ for i = 1:imSize(1)
         quantRow = mod(i - 1, blockSize) + 1;
         quantCol = mod(j - 1, blockSize) + 1;
         
-        %divide the dct values by the quantization table values piece-wise
-        quantizedImg(i, j, 1) = round(sourceImg(i, j, 1) / lumQuant(quantRow, quantCol));
-        quantizedImg(i, j, 2) = round(sourceImg(i, j, 2) / chromQuant(quantRow, quantCol));
-        quantizedImg(i, j, 3) = round(sourceImg(i, j, 3) / chromQuant(quantRow, quantCol));
+        %multiply the dct values by the quantization table values piece-wise
+        dctImg(i, j, 1) = quantizedImg(i, j, 1) * lumQuant(quantRow, quantCol);
+        dctImg(i, j, 2) = quantizedImg(i, j, 2) * chromQuant(quantRow, quantCol);
+        dctImg(i, j, 3) = quantizedImg(i, j, 3) * chromQuant(quantRow, quantCol);
     end
 end
 

@@ -14,6 +14,7 @@ function f = jpegDecompress(quantizedImg)
 imSize = size(quantizedImg);
 
 %dequantize
+blockSize = 8;
 
 %luminance quantization table
 lumQuant = [16  11  10  16  24  40  51  61;
@@ -38,7 +39,6 @@ chromQuant = [17 18 24 47 99 99 99 99;
 dctImg = quantizedImg;
 
 %2D IDCT with block size 8
-blockSize = 8;
 yCbCrImg = dctImg;
 
 %convert image to yCbCr

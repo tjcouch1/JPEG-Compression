@@ -13,12 +13,12 @@ function f = jpegDecompress(quantizedImg)
 %get image size
 imSize = size(quantizedImg);
 
-%dequantize
-dctImg = dequantize(quantizedImg);
-
-%2D IDCT with block size 8
+%dequantize with block size 8
 blockSize = 8;
-yCbCrImg = dctImg;
+dctImg = dequantize(quantizedImg, blockSize);
+
+%2D IDCT
+yCbCrImg = idct2D(dctImg, blockSize);
 
 %convert image to yCbCr
 rgbImg = ycbcr2rgb(yCbCrImg);

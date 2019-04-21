@@ -1,6 +1,7 @@
 % dequantize.m - dequantizes the quantized image according to JPEG standard
-% quantize(image)
-% sourceImg: the quantize image matrix to dequantize
+% quantize(quantizedImg, blockSize)
+% quantizedImg: the quantize image matrix to dequantize
+% blockSize: the size of the chunks to use
 % Note: the image must be in YCbCr format
 % returns dequantized DCT image
 % 
@@ -10,11 +11,10 @@
 % 4/8/19
 
 %Written by TJ Couch
-function f = dequantize(quantizedImg)
+function f = dequantize(quantizedImg, blockSize)
 
 %get image size
 imSize = size(quantizedImg);
-blockSize = 8;
 
 %luminance quantization table
 lumQuant = [16  11  10  16  24  40  51  61;

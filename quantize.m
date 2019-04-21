@@ -1,6 +1,7 @@
 % quantize.m - quantizes the DCT image according to JPEG standard
-% quantize(image)
-% sourceImg: the DCT image matrix to quantize
+% quantize(dctImg, blockSize)
+% dctImg: the DCT image matrix to quantize
+% blockSize: the size of the chunks to use
 % Note: the image must be in YCbCr format
 % returns quantized DCT image
 % 
@@ -10,11 +11,10 @@
 % 4/8/19
 
 %Written by TJ Couch
-function f = quantize(dctImg)
+function f = quantize(dctImg, blockSize)
 
 %get image size
 imSize = size(dctImg);
-blockSize = 8;
 
 %luminance quantization table
 lumQuant = [16  11  10  16  24  40  51  61;

@@ -21,9 +21,9 @@ subsampledImg = chromaSub(yCbCrImg, 2, 0);
 
 %2D DCT with block size 8
 blockSize = 8;
-dctImg = subsampledImg;
+dctImg = dct2D(subsampledImg, blockSize);
 
 %quantize
-quantizedImg = quantize(dctImg);
+quantizedImg = quantize(dctImg, blockSize);
 
 f = quantizedImg;

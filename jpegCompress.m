@@ -10,8 +10,8 @@
 
 function f = jpegCompress(sourceImg)
 
-%get image size
-imSize = size(sourceImg);
+%block size 8
+blockSize = 8;
 
 %convert image to yCbCr
 yCbCrImg = rgb2ycbcr(sourceImg);

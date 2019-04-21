@@ -1,5 +1,5 @@
 % compressImages
-% converts the three images in this directory from rgb to YCbCr
+% converts the three images in this directory from rgb to JPEG compressed and back again
 % 
 % TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project
@@ -27,4 +27,14 @@ for i = 1:3
     %write compressed image to its own file
     writeName = sprintf('compressed-image%d.png', i);
     imwrite(compressedImg, writeName);
+    
+    %decompress image
+    decompressedImg = chromaSub(compressedImg, 2, 0);%jpegDeompress(compressedImg);
+    
+    %show image
+    imshow(decompressedImg);
+    
+    %write decompressed image to its own file
+    writeName = sprintf('decompressed-image%d.png', i);
+    imwrite(decompressedImg, writeName);
 end

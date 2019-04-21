@@ -1,5 +1,5 @@
 % compressInput
-% prompts the user for an image, then compresses the image at the supplied path
+% prompts the user for an image, then compresses and decompresses the image at the supplied path
 % 
 % TJ Couch, Matthew Robertson, Austin Vickers
 % JPEG Compression Project
@@ -29,4 +29,14 @@ else
     %write compressed image to its own file
     writeName = sprintf('compressed-%s%s', fileName(1:end-4), '.png');
     imwrite(compressedImg, writeName);
+
+    %decompress image
+    decompressedImg = jpegCompress(compressedImg);
+    
+    %show image
+    imshow(decompressedImg);
+
+    %write compressed image to its own file
+    writeName = sprintf('decompressed-%s%s', fileName(1:end-4), '.png');
+    imwrite(decompressedImg, writeName);
 end

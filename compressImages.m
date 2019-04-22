@@ -21,8 +21,9 @@ for i = 1:3
     %compress image
     compressedImg = jpegCompress(sourceImg);
     
-    %show image
-    %imshow(compressedImg);
+    %show image values step I
+    sourceImg(1:8, 1:8, :)
+    compressedImg(1:8, 1:8, :)
     
     %write compressed image to its own file
     writeName = sprintf('compressed-image%d.png', i);
@@ -31,8 +32,9 @@ for i = 1:3
     %decompress image
     decompressedImg = jpegDecompress(compressedImg);
     
-    %show image
+    %show image and values
     imshow(decompressedImg);
+    decompressedImg(1:8, 1:8, :)
     
     %calculate pixel wise error
     errorImg = pixelWiseError(sourceImg, decompressedImg);
@@ -45,4 +47,5 @@ for i = 1:3
     writeName = sprintf('decompressed-image%d.png', i);
     imwrite(decompressedImg, writeName);
     
+    pause
 end

@@ -28,8 +28,8 @@ for originRow = 1:blockSize:imSize(1)%block origin point (0, 0) for row
         end
         %max column for block, generally 0-7. Cut off for end of image
         blockTopCol = blockSize - 1;
-        if (originCol + blockTopCol > imSize(1))
-            blockTopCol = imSize(1) - originRow;
+        if (originCol + blockTopCol > imSize(2))
+            blockTopCol = imSize(2) - originRow;
         end
         %for each u and v
         for u = 0:blockTopRow
@@ -44,16 +44,25 @@ for originRow = 1:blockSize:imSize(1)%block origin point (0, 0) for row
                     cv = 0.70710678118;%sqrt(2) / 2 but fast
                 end
                 
+                cosSumY = 0;%all the stuff inside the i and j loops
+                cosSumCb = 0;%all the stuff inside the i and j loops
+                cosSumCr = 0;%all the stuff inside the i and j loops
                 %for each pixel in the block
                 for i = 0:blockTopRow
                     for j = 0:blockTopCol
-                        
-                        subSampledImg(originRow + i, originCol + j, 1)%f(i, j) for Y
+                        dI = double(i);
+                        dJ = double(j);
+                        %cos * cos * f(i, j)
+                        cosSumY = cosSumY + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * subsampledImg(originRow + i, originCol + j, 1);
+                        cosSumCb = cosSumCb + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * subsampledImg(originRow + i, originCol + j, 2);
+                        cosSumCr = cosSumCr + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * subsampledImg(originRow + i, originCol + j, 3);
                     end
                 end
                 
                 %calculate final F(u, v)
-                dctImg(originRow + u, originCol v, 1)%F(u, v) for Y
+                dctImg(originRow + u, originCol + v, 1) = cu * cv / 4 * cosSumY;
+                dctImg(originRow + u, originCol + v, 2) = cu * cv / 4 * cosSumCb;
+                dctImg(originRow + u, originCol + v, 3) = cu * cv / 4 * cosSumCr;
             end
         end
     end

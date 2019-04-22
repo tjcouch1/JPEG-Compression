@@ -34,6 +34,12 @@ for i = 1:3
     %show image
     imshow(decompressedImg);
     
+    %calculate pixel wise error
+    errorImg = pixelWiseError(sourceImg, decompressedImg);
+    imagesc(errorImg)
+    
+    %compute PSNR
+    
     %write decompressed image to its own file
     writeName = sprintf('decompressed-image%d.png', i);
     imwrite(decompressedImg, writeName);

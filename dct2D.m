@@ -18,17 +18,44 @@ imSize = size(subsampledImg);
 
 dctImg = zeros(imSize);
 
-%SAMPLE CODE. REPLACE
-for i = 1:imSize(1)
-    for j = 1:imSize(2)
-        %get the image position wrapped to the block size for the quantization tables
-        quantRow = mod(i - 1, blockSize) + 1;
-        quantCol = mod(j - 1, blockSize) + 1;
-        
-        %multiply the dct values by the quantization table values piece-wise
-        dctImg(i, j, 1) = subsampledImg(i, j, 1) * lumQuant(quantRow, quantCol);
-        dctImg(i, j, 2) = subsampledImg(i, j, 2) * chromQuant(quantRow, quantCol);
-        dctImg(i, j, 3) = subsampledImg(i, j, 3) * chromQuant(quantRow, quantCol);
+%for each block
+for originRow = 1:blockSize:imSize(1)%block origin point (0, 0) for row
+    for originCol = 1:blockSize:imSize(2)%block origin point (0, 0) for column
+        %max row for block, generally 0-7. Cut off for end of image
+        blockTopRow = blockSize - 1;
+        if (originRow + blockTopRow > imSize(1))
+            blockTopRow = imSize(1) - originRow;
+        end
+        %max column for block, generally 0-7. Cut off for end of image
+        blockTopCol = blockSize - 1;
+        if (originCol + blockTopCol > imSize(1))
+            blockTopCol = imSize(1) - originRow;
+        end
+        %for each u and v
+        for u = 0:blockTopRow
+            for v = 0:blockTopCol
+                %get c value for u and v
+                cu = 1;
+                if (u == 0)
+                    cu = 0.70710678118;%sqrt(2) / 2 but fast
+                end
+                cv = 1;
+                if (v == 0)
+                    cv = 0.70710678118;%sqrt(2) / 2 but fast
+                end
+                
+                %for each pixel in the block
+                for i = 0:blockTopRow
+                    for j = 0:blockTopCol
+                        
+                        subSampledImg(originRow + i, originCol + j, 1)%f(i, j) for Y
+                    end
+                end
+                
+                %calculate final F(u, v)
+                dctImg(originRow + u, originCol v, 1)%F(u, v) for Y
+            end
+        end
     end
 end
 

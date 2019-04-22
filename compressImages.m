@@ -39,8 +39,10 @@ for i = 1:3
     imagesc(errorImg)
     
     %compute PSNR
+    PSNRresult = PSNR(sourceImg, decompressedImg)
     
     %write decompressed image to its own file
     writeName = sprintf('decompressed-image%d.png', i);
     imwrite(decompressedImg, writeName);
+    
 end

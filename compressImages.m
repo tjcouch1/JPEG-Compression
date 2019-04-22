@@ -19,7 +19,7 @@ for i = 1:3
     sourceImg = imread(fileName);
     
     %compress image
-    compressedImg = chromaSub(sourceImg, 2, 0);%jpegCompress(sourceImg);
+    compressedImg = jpegCompress(sourceImg);
     
     %show image
     imshow(compressedImg);
@@ -29,7 +29,7 @@ for i = 1:3
     imwrite(compressedImg, writeName);
     
     %decompress image
-    decompressedImg = chromaSub(compressedImg, 2, 0);%jpegDeompress(compressedImg);
+    decompressedImg = jpegDeompress(compressedImg);
     
     %show image
     imshow(decompressedImg);

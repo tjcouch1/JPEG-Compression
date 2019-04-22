@@ -19,8 +19,8 @@ imSize = size(subsampledImg);
 dctImg = zeros(imSize);
 
 %for each block
-for originRow = 1:blockSize:imSize(1)%block origin point (0, 0) for row
-    for originCol = 1:blockSize:imSize(2)%block origin point (0, 0) for column
+for originRow = 1:blockSize:imSize(1) %block origin point (0, 0) for row
+    for originCol = 1:blockSize:imSize(2) %block origin point (0, 0) for column
         %max row for block, generally 0-7. Cut off for end of image
         blockTopRow = blockSize - 1;
         if (originRow + blockTopRow > imSize(1))
@@ -29,16 +29,18 @@ for originRow = 1:blockSize:imSize(1)%block origin point (0, 0) for row
         %max column for block, generally 0-7. Cut off for end of image
         blockTopCol = blockSize - 1;
         if (originCol + blockTopCol > imSize(2))
-            blockTopCol = imSize(2) - originRow;
+            blockTopCol = imSize(2) - originCol;
         end
+        
         %for each u and v
         for u = 0:blockTopRow
+            %get c value for u
+            cu = 1;
+            if (u == 0)
+                cu = 0.70710678118;%sqrt(2) / 2 but fast
+            end
             for v = 0:blockTopCol
-                %get c value for u and v
-                cu = 1;
-                if (u == 0)
-                    cu = 0.70710678118;%sqrt(2) / 2 but fast
-                end
+                %get c value for v
                 cv = 1;
                 if (v == 0)
                     cv = 0.70710678118;%sqrt(2) / 2 but fast
@@ -53,9 +55,9 @@ for originRow = 1:blockSize:imSize(1)%block origin point (0, 0) for row
                         dI = double(i);
                         dJ = double(j);
                         %cos * cos * f(i, j)
-                        cosSumY = cosSumY + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * subsampledImg(originRow + i, originCol + j, 1);
-                        cosSumCb = cosSumCb + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * subsampledImg(originRow + i, originCol + j, 2);
-                        cosSumCr = cosSumCr + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * subsampledImg(originRow + i, originCol + j, 3);
+                        cosSumY = cosSumY + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * int32(subsampledImg(originRow + i, originCol + j, 1));
+                        cosSumCb = cosSumCb + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * int32(subsampledImg(originRow + i, originCol + j, 2));
+                        cosSumCr = cosSumCr + cos((2 * dI + 1) * u * pi / 16) * cos((2 * dJ + 1) * v * pi / 16) * int32(subsampledImg(originRow + i, originCol + j, 3));
                     end
                 end
                 

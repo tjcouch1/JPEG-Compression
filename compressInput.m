@@ -24,7 +24,7 @@ else
     compressedImg = jpegCompress(sourceImg);
     
     %show image
-    imshow(compressedImg);
+    %imshow(compressedImg);
 
     %write compressed image to its own file
     writeName = sprintf('compressed-%s%s', fileName(1:end-4), '.png');

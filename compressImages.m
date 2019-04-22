@@ -22,14 +22,14 @@ for i = 1:3
     compressedImg = jpegCompress(sourceImg);
     
     %show image
-    imshow(compressedImg);
+    %imshow(compressedImg);
     
     %write compressed image to its own file
     writeName = sprintf('compressed-image%d.png', i);
     imwrite(compressedImg, writeName);
     
     %decompress image
-    decompressedImg = jpegDeompress(compressedImg);
+    decompressedImg = jpegDecompress(compressedImg);
     
     %show image
     imshow(decompressedImg);
